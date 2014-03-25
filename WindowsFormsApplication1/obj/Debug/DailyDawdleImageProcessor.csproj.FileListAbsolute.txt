@@ -1,0 +1,9 @@
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\DailyDawdleImageProcessor.exe.config
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\DailyDawdleImageProcessor.exe
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\DailyDawdleImageProcessor.pdb
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\DailyDawdleImageProcessor.csprojResolveAssemblyReference.cache
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\DailyDawdleImageProcessor.Properties.Resources.resources
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\DailyDawdleImageProcessor.csproj.GenerateResource.Cache
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\DailyDawdleImageProcessor.exe
+c:\users\gling\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\DailyDawdleImageProcessor.pdb
