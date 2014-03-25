@@ -96,6 +96,8 @@ namespace WindowsFormsApplication1
          * */
         private String[] getAllJPGFiles(String dir)
         {
+            //TODO: need to convert any .gifs or .pngs to .jpg. so we do need multiple extension filter
+
             String[] filePaths = Directory.GetFiles(@dir, "*.jpg");                         //works for JPG as well
             Console.WriteLine("The number of files ending with .jpg is {0}.", filePaths.Length);
 
@@ -124,16 +126,31 @@ namespace WindowsFormsApplication1
                 prefixString = new FileInfo(path).Directory.FullName;
                 newPath = prefixString + "\\" + dirName + i + ".jpg";
                 Console.WriteLine("Copied to: " + newPath);
-               
-                
-                if (File.Exists(path))
+
+                if (File.Exists(path) && !File.Exists(newPath))
                 {
                    File.Copy(path, newPath);
                    File.Delete(path);
+                   resizeImage(newPath);
                 }
             }//end for
         }//end changeJPGNames
 
+
+        private void resizeImage(String imagePath)
+        {
+            Image img = Image.FromFile(imagePath);
+
+            int width = img.Width;
+            int height = img.Height;
+
+            Console.WriteLine("Height: " + height);
+            Console.WriteLine("Width: " + width);
+
+
+
+
+        }
 
 
 
