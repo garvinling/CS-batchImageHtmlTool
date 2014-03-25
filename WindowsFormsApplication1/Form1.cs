@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsApplication1
 {
@@ -22,6 +23,7 @@ namespace WindowsFormsApplication1
         {
             String dir = "";
             String folderName = "";
+            String[] filePaths;
             Console.WriteLine("User browsing for files.\n");
 
             dir = getFolderDirectory();                 
@@ -31,9 +33,11 @@ namespace WindowsFormsApplication1
                 folderName = getFolderName(dir);        //get selected directory name
             }
 
-            getAllJPGFiles(dir);
-  
-            //Check that folder contains only .JPGs. otherwise only store JPG paths.
+            filePaths = getAllJPGFiles(dir);            //Store .jpg filenames into string[]
+
+            changeJPGNames(filePaths,folderName);
+            
+         
 
             //Set name of files.   directoryName_#
 
@@ -90,21 +94,45 @@ namespace WindowsFormsApplication1
          * getAllJPGFiles()
          * 
          * */
-        private void getAllJPGFiles(String dir)
+        private String[] getAllJPGFiles(String dir)
         {
-            string[] filePaths = Directory.GetFiles(@dir, "*.jpg");
+            String[] filePaths = Directory.GetFiles(@dir, "*.jpg");                         //works for JPG as well
             Console.WriteLine("The number of files ending with .jpg is {0}.", filePaths.Length);
 
-            foreach (string dirs in filePaths)
+            for (int i = 0; i < filePaths.Length; i++)
             {
-                Console.WriteLine("Array: " +dir);
+                Console.WriteLine("File: " + filePaths[i]);
+
             }
 
+            return filePaths;
+
+        }//end getAllJPGFiles()
 
 
 
-        }
+        private void changeJPGNames(String[] filePaths,String dirName)
+        {
+            string path = "";
+            string newPath = "";
+            string prefixString = "";
 
+
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+                path = @filePaths[i];
+                prefixString = new FileInfo(path).Directory.FullName;
+                newPath = prefixString + "\\" + dirName + i + ".jpg";
+                Console.WriteLine("Copied to: " + newPath);
+               
+                
+                if (File.Exists(path))
+                {
+                   File.Copy(path, newPath);
+                   File.Delete(path);
+                }
+            }//end for
+        }//end changeJPGNames
 
 
 
