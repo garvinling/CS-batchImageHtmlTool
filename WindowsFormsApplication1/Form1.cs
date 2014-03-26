@@ -40,13 +40,15 @@ namespace WindowsFormsApplication1
 
             changeJPGNames(filePaths,folderName);
 
-            folderDirectoryLabel.Text = folderDirectoryLabel.Text + " \\" +folderName;
+            folderDirectoryLabel.Text ="Folder Selected: "+" \\" +folderName;   //need to CLEAR/RESET ON NEXT RUNTHROUGH
 
             htmlOutput = generateHTML(filePaths);
 
             writeTextFile(htmlOutput);
+            
+            //Need to somehow check if everything was okay>  status:  0: OK   1: OK w./ some errors 2: FAILED  
 
-            //output html with filename to .txt on desktop 
+            statusLabel.Text = statusLabel.Text + " Batch processing finished. OK!";
 
         }//end Browse Onclick
 
