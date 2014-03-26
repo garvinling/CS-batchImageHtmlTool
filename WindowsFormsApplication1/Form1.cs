@@ -96,18 +96,26 @@ namespace WindowsFormsApplication1
          * */
         private String[] getAllJPGFiles(String dir)
         {
-            //TODO: need to convert any .gifs or .pngs to .jpg. so we do need multiple extension filter
-
-            String[] filePaths = Directory.GetFiles(@dir, "*.jpg");                         //works for JPG as well
+            List<String> files = Directory.GetFiles(@dir, "*").ToList();
             Console.WriteLine("The number of files ending with .jpg is {0}.", filePaths.Length);
 
-            for (int i = 0; i < filePaths.Length; i++)
+            foreach (string values in files)
             {
-                Console.WriteLine("File: " + filePaths[i]);
+                if (values.EndsWith(".png") || values.EndsWith(".gif") || values.EndsWith(".jpg"))
+                {
+                    Console.WriteLine("File Found: " + values);
 
+                }
+                else
+                {
+                    files.Remove(values);
+                }
+
+
+                
             }
-
-            return filePaths;
+            String[] output = files.ToArray();
+            return output;
 
         }//end getAllJPGFiles()
 
@@ -130,10 +138,9 @@ namespace WindowsFormsApplication1
                 if (File.Exists(path) && !File.Exists(newPath))
                 {
 
-                     resizeImage(path,newPath);
+                    // resizeImage(530,path,newPath);
 
-                      //file already exists exception 
-                   File.Delete(path);
+                    // File.Delete(path);
                 }
             }//end for
         }//end changeJPGNames
@@ -142,7 +149,7 @@ namespace WindowsFormsApplication1
 
 
 
-        private void resizeImage(String oldPath, String newPath)
+        private void resizeImage(int resizeWidth, String oldPath, String newPath)
         {
 
             //original height/ original width * new width = new height
@@ -150,18 +157,26 @@ namespace WindowsFormsApplication1
 
             int width = img.Width;
             int height = img.Height;
-            double ratio = (double)height / (double)width;
-            double newHeight = ratio * (double)530;
 
-            var newImage = new Bitmap(530, (int)newHeight);
-            Graphics.FromImage(newImage).DrawImage(img, 0, 0, 530, (int)newHeight);
+            if (width < 530)
+            {
+                Console.WriteLine("Image width is less than 530. No conversion was made.");
+                //add to error data structure 
+                return; 
+            }
+            
+            double ratio = (double)height / (double)width;
+            double newHeight = ratio * (double)resizeWidth;
+
+            var newImage = new Bitmap(resizeWidth, (int)newHeight);
+            Graphics.FromImage(newImage).DrawImage(img, 0, 0, resizeWidth, (int)newHeight);
 
             newImage.Save(@newPath);
 
             img.Dispose();
             newImage.Dispose();
 
-        }
+        }//end resizeImage 
 
 
 
