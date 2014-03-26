@@ -227,12 +227,20 @@ namespace WindowsFormsApplication1
 
             String username = Environment.UserName;
             Console.WriteLine("User: " + username);
+            int moreCounter = 0;
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\" + username + "\\Desktop\\DailyDawdleOutput.txt"))
             {
                 foreach (string htmlItem in htmlOutput)
                 {
+                    
                     file.WriteLine(htmlItem);
+                    moreCounter++;
 
+                    if (moreCounter == 3)
+                    {
+                        file.WriteLine("\n<!--more-->\n");
+                        //moreCounter = 0;
+                    }
                 }
 
             }
