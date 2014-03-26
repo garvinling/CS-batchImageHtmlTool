@@ -129,26 +129,37 @@ namespace WindowsFormsApplication1
 
                 if (File.Exists(path) && !File.Exists(newPath))
                 {
-                   File.Copy(path, newPath);
+
+                     resizeImage(path,newPath);
+
+                      //file already exists exception 
                    File.Delete(path);
-                   resizeImage(newPath);
                 }
             }//end for
         }//end changeJPGNames
 
 
-        private void resizeImage(String imagePath)
+
+
+
+        private void resizeImage(String oldPath, String newPath)
         {
-            Image img = Image.FromFile(imagePath);
+
+            //original height/ original width * new width = new height
+            Image img = Image.FromFile(oldPath);
 
             int width = img.Width;
             int height = img.Height;
+            double ratio = (double)height / (double)width;
+            double newHeight = ratio * (double)530;
 
-            Console.WriteLine("Height: " + height);
-            Console.WriteLine("Width: " + width);
+            var newImage = new Bitmap(530, (int)newHeight);
+            Graphics.FromImage(newImage).DrawImage(img, 0, 0, 530, (int)newHeight);
 
+            newImage.Save(@newPath);
 
-
+            img.Dispose();
+            newImage.Dispose();
 
         }
 
