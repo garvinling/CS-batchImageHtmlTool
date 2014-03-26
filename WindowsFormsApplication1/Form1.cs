@@ -42,7 +42,10 @@ namespace WindowsFormsApplication1
 
             folderDirectoryLabel.Text = folderDirectoryLabel.Text + " \\" +folderName;
 
-            generateHTML(filePaths);
+            htmlOutput = generateHTML(filePaths);
+
+            writeTextFile(htmlOutput);
+
             //output html with filename to .txt on desktop 
 
         }//end Browse Onclick
@@ -184,7 +187,7 @@ namespace WindowsFormsApplication1
         }//end resizeImage 
 
 
-        private void generateHTML(String[] filePaths)
+        private List<String> generateHTML(String[] filePaths)
         {
             /**
             <div class="separator" style="clear: both; text-align: center;">
@@ -199,7 +202,6 @@ namespace WindowsFormsApplication1
             String divOpen = "<div class=\"separator\" style=\"clear: both; text-align:center;\">\n";
             String anchorOpen = "<a href=\"\" imageanchor=\"\" style=\"margin-left:1em; margin-right:1em;\">\n";
             String imgOpen = "<img border=\"0\" src=\"";
-            //sandwich the url in between + URL + 
             String imgClose = "\" alt=\"funny pic, humor, cool videos, cool art, cool designs, funny photos, cute dogs, funny cats, fail, weird photos, daily dawdle\" title=\"funny pic, humor, cool videos, cool art, cool designs, funny photos, cute dogs, funny cats, fail, weird photos, daily dawdle\"/>\n";
             String anchorClose = "</a>\n";
             String divClose = "</div>\n";
@@ -210,20 +212,34 @@ namespace WindowsFormsApplication1
 
                 String fileName = getFolderName(filePaths[i]);  //reuse the getfoldername() function to get the file name 
                 String htmlItem = divOpen + anchorOpen + imgOpen + "http://images.dailydawdle.com/" + fileName + imgClose + anchorClose + divClose;
-                Console.WriteLine("HTML OUTPUT: " + htmlItem);
+                htmlOutput.Add(htmlItem);
             }
 
-
-
-
-
+            return htmlOutput;
 
         }
 
 
 
 
+        private void writeTextFile(List<String> htmlOutput)
+        {
 
+            String username = Environment.UserName;
+            Console.WriteLine("User: " + username);
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\" + username + "\\Desktop\\DailyDawdleOutput.txt"))
+            {
+                foreach (string htmlItem in htmlOutput)
+                {
+                    file.WriteLine(htmlItem);
+
+                }
+
+            }
+
+
+
+        }
 
 
 

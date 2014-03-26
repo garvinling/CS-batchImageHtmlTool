@@ -6,3 +6,4 @@ C:\Users\gling\Documents\Visual Studio 2012\Projects\WindowsFormsApplication1\Wi
 C:\Users\gling\Documents\Visual Studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\DailyDawdleImageProcessor.pdb
 C:\Users\gling\Documents\Visual Studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DailyDawdleImageProcessor.exe
 C:\Users\gling\Documents\Visual Studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DailyDawdleImageProcessor.pdb
+C:\Users\gling\Documents\Visual Studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\DailyDawdleImageProcessor.csprojResolveAssemblyReference.cache
