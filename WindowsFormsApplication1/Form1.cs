@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace WindowsFormsApplication1
 {
@@ -24,8 +25,10 @@ namespace WindowsFormsApplication1
             String dir = "";
             String folderName = "";
             String[] filePaths;
+            List<String> htmlOutput = new List<String>();
             Console.WriteLine("User browsing for files.\n");
 
+            
             dir = getFolderDirectory();                 
 
             if (dir != null)
@@ -36,16 +39,16 @@ namespace WindowsFormsApplication1
             filePaths = getAllJPGFiles(dir);            //Store .jpg filenames into string[]
 
             changeJPGNames(filePaths,folderName);
-            
-         
 
-            //Set name of files.   directoryName_#
+            folderDirectoryLabel.Text = folderDirectoryLabel.Text + " \\" +folderName;
 
-            //Resize/scale to aspect ratio
-
+            generateHTML(filePaths);
             //output html with filename to .txt on desktop 
 
         }//end Browse Onclick
+
+
+
 
 
 
@@ -97,24 +100,23 @@ namespace WindowsFormsApplication1
         private String[] getAllJPGFiles(String dir)
         {
             List<String> files = Directory.GetFiles(@dir, "*").ToList();
-            Console.WriteLine("The number of files ending with .jpg is {0}.", filePaths.Length);
+
+
 
             foreach (string values in files)
             {
                 if (values.EndsWith(".png") || values.EndsWith(".gif") || values.EndsWith(".jpg"))
                 {
                     Console.WriteLine("File Found: " + values);
-
                 }
                 else
                 {
                     files.Remove(values);
                 }
-
-
-                
             }
             String[] output = files.ToArray();
+            filesFound.Text = "Files Found: " + output.Length;
+
             return output;
 
         }//end getAllJPGFiles()
@@ -138,9 +140,9 @@ namespace WindowsFormsApplication1
                 if (File.Exists(path) && !File.Exists(newPath))
                 {
 
-                    // resizeImage(530,path,newPath);
+                    resizeImage(530,path,newPath);
 
-                    // File.Delete(path);
+                    File.Delete(path);
                 }
             }//end for
         }//end changeJPGNames
@@ -160,7 +162,10 @@ namespace WindowsFormsApplication1
 
             if (width < 530)
             {
-                Console.WriteLine("Image width is less than 530. No conversion was made.");
+                String errors = errorLabel.Text;
+                img.Dispose();
+                errors = errors + "\nImage width is less than 530. No conversion was made on " + oldPath;
+                errorLabel.Text = errors;
                 //add to error data structure 
                 return; 
             }
@@ -175,8 +180,55 @@ namespace WindowsFormsApplication1
 
             img.Dispose();
             newImage.Dispose();
-
+           
         }//end resizeImage 
+
+
+        private void generateHTML(String[] filePaths)
+        {
+            /**
+            <div class="separator" style="clear: both; text-align: center;">
+            <a href="" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+            <img border="0" src="http://images.dailydawdle.com/FileNameHERE" alt="funny pic, humor, cool videos, cool art, cool designs, funny photos, cute dogs, funny cats, fail, weird photos, daily dawdle" title="funny pic, humor, cool videos, cool art, cool designs, funny photos, cute dogs, funny cats, fail, weird photos, daily dawdle" />
+            </a> 
+            </div>
+             **/
+
+            List<String> htmlOutput = new List<String>();
+            StringWriter stringWriter = new StringWriter();
+            String divOpen = "<div class=\"separator\" style=\"clear: both; text-align:center;\">\n";
+            String anchorOpen = "<a href=\"\" imageanchor=\"\" style=\"margin-left:1em; margin-right:1em;\">\n";
+            String imgOpen = "<img border=\"0\" src=\"";
+            //sandwich the url in between + URL + 
+            String imgClose = "\" alt=\"funny pic, humor, cool videos, cool art, cool designs, funny photos, cute dogs, funny cats, fail, weird photos, daily dawdle\" title=\"funny pic, humor, cool videos, cool art, cool designs, funny photos, cute dogs, funny cats, fail, weird photos, daily dawdle\"/>\n";
+            String anchorClose = "</a>\n";
+            String divClose = "</div>\n";
+
+
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+
+                String fileName = getFolderName(filePaths[i]);  //reuse the getfoldername() function to get the file name 
+                String htmlItem = divOpen + anchorOpen + imgOpen + "http://images.dailydawdle.com/" + fileName + imgClose + anchorClose + divClose;
+                Console.WriteLine("HTML OUTPUT: " + htmlItem);
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 
