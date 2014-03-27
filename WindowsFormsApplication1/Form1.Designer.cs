@@ -146,6 +146,8 @@
             this.Controls.Add(this.filesFound);
             this.Controls.Add(this.folderDirectoryLabel);
             this.Controls.Add(this.button1);
+            this.MaximumSize = new System.Drawing.Size(400, 475);
+            this.MinimumSize = new System.Drawing.Size(356, 475);
             this.Name = "Form1";
             this.Text = "DailyDawdle";
             this.TransparencyKey = System.Drawing.Color.Transparent;

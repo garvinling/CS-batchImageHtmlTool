@@ -44,7 +44,7 @@ namespace WindowsFormsApplication1
 
             htmlOutput = generateHTML(filePaths);
 
-            writeTextFile(htmlOutput);
+            writeTextFile(htmlOutput,dir);
             
             //Need to somehow check if everything was okay>  status:  0: OK   1: OK w./ some errors 2: FAILED  
 
@@ -165,6 +165,7 @@ namespace WindowsFormsApplication1
             int width = img.Width;
             int height = img.Height;
 
+            /**
             if (width < 530)
             {
                 String errors = errorLabel.Text;
@@ -173,7 +174,7 @@ namespace WindowsFormsApplication1
                 errorLabel.Text = errors;
                 //add to error data structure 
                 return; 
-            }
+            }**/
             
             double ratio = (double)height / (double)width;
             double newHeight = ratio * (double)resizeWidth;
@@ -224,13 +225,12 @@ namespace WindowsFormsApplication1
 
 
 
-        private void writeTextFile(List<String> htmlOutput)
+        private void writeTextFile(List<String> htmlOutput,String filePath)
         {
+ 
 
-            String username = Environment.UserName;
-            Console.WriteLine("User: " + username);
             int moreCounter = 0;
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\" + username + "\\Desktop\\DailyDawdleOutput.txt"))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filePath+"\\DailyDawdleOutput.txt"))
             {
                 foreach (string htmlItem in htmlOutput)
                 {
