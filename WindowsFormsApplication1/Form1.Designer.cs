@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.folderDirectoryLabel = new System.Windows.Forms.Label();
             this.filesFound = new System.Windows.Forms.Label();
@@ -146,6 +147,7 @@
             this.Controls.Add(this.filesFound);
             this.Controls.Add(this.folderDirectoryLabel);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(400, 475);
             this.MinimumSize = new System.Drawing.Size(356, 475);
             this.Name = "Form1";

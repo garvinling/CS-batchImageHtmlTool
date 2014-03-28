@@ -48,6 +48,7 @@ namespace WindowsFormsApplication1
             
             //Need to somehow check if everything was okay>  status:  0: OK   1: OK w./ some errors 2: FAILED  
 
+            statusLabel.Text = "Status: ";
             statusLabel.Text = statusLabel.Text + " Batch processing finished. OK!";
 
         }//end Browse Onclick
@@ -108,7 +109,7 @@ namespace WindowsFormsApplication1
 
 
 
-            foreach (string values in files)
+            foreach (string values in files.ToList())
             {
                 if (values.EndsWith(".png") || values.EndsWith(".gif") || values.EndsWith(".jpg"))
                 {
@@ -140,6 +141,7 @@ namespace WindowsFormsApplication1
                 path = @filePaths[i];
                 prefixString = new FileInfo(path).Directory.FullName;
                 newPath = prefixString + "\\" + dirName + i + ".jpg";
+                filePaths[i] = newPath;                                         //Replace old name with new renamed file.
                 Console.WriteLine("Copied to: " + newPath);
 
                 if (File.Exists(path) && !File.Exists(newPath))
