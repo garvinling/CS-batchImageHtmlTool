@@ -151,7 +151,7 @@
             this.MaximumSize = new System.Drawing.Size(400, 475);
             this.MinimumSize = new System.Drawing.Size(356, 475);
             this.Name = "Form1";
-            this.Text = "DailyDawdle";
+            this.Text = "DailyDawdle (BETA v0.9)";
             this.TransparencyKey = System.Drawing.Color.Transparent;
             this.ResumeLayout(false);
             this.PerformLayout();

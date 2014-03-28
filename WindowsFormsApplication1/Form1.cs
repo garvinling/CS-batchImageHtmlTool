@@ -140,7 +140,20 @@ namespace WindowsFormsApplication1
             {
                 path = @filePaths[i];
                 prefixString = new FileInfo(path).Directory.FullName;
-                newPath = prefixString + "\\" + dirName + i + ".jpg";
+
+
+                if (i < 9)
+                {
+                    Console.WriteLine("under 10");
+                    newPath = prefixString + "\\" + dirName + "0" + ( i + 1) + ".jpg";             //add leading zero for images under 10
+                }
+                else
+                {
+                    newPath = prefixString + "\\" + dirName + (i + 1) + ".jpg";
+
+                }
+                
+                
                 filePaths[i] = newPath;                                         //Replace old name with new renamed file.
                 Console.WriteLine("Copied to: " + newPath);
 
